@@ -108,6 +108,15 @@ void upperhes(double *a, int n, double *u, double *b) {
 	double b_r1j = b[(r+1)*n+j];
 	b[r*n+j] = cosa * b_rj - sina * b_r1j;
 	b[(r+1)*n+j] = sina * b_rj + cosa * b_r1j;
+
+	
+	//update u
+	double u_rj = u[r*n+j];
+	double u_r1j = u[(r+1)*n+j];
+	u[r*n+j] = cosa * u_rj - sina * u_r1j;
+	u[(r+1)*n+j] = sina * u_rj + cosa * u_r1j;
+
+
       }
       for (j = 0; j < n; j++) {
 	double b_jr = b[j*n+r];
@@ -119,14 +128,14 @@ void upperhes(double *a, int n, double *u, double *b) {
 
 
       //update U
-      double *v = (double *)malloc(n*n*sizeof(double));
+      /*double *v = (double *)malloc(n*n*sizeof(double));
       assignIdentity(v, n);
       v[r*n+r] = cosa;
       v[r*n+r+1] = -sina;
       v[(r+1)*n+r] = sina;
       v[(r+1)*n+r+1] = cosa;            
       memcpy(u, multiply(v, u, n, n, n), n*n*sizeof(double));
-
+      */
       // printf("\nV:\n");
       // printMatrix(v, n);
 
